@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Electron Configuration Board · Aasia Khawar</title>
+<style>
+:root{--bg:#fff;--fg:#1b1b1b;--mut:#555;--line:#d4d8de;--card:#f5f7fa;--s:#1D5FA8;--sb:#DCEBFA;--p:#B4540A;--pb:#FDE8D3;--d:#6B3FA0;--db:#EBDDF7;--ok:#17692f;--okb:#E3F3E8;--er:#B3261E;--erb:#FCE8E6;--ac:#12304f;--acf:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--fg:#eceff3;--mut:#a9b0bb;--line:#363d48;--card:#1d2128;--s:#86b9f2;--sb:#17314f;--p:#f2aa70;--pb:#4a2a10;--d:#c7a6ee;--db:#33204d;--ok:#7fd49a;--okb:#14301f;--er:#ff9a92;--erb:#3d1a18;--ac:#cfe3fa;--acf:#14161a}}
+:root[data-theme="dark"]{--bg:#14161a;--fg:#eceff3;--mut:#a9b0bb;--line:#363d48;--card:#1d2128;--s:#86b9f2;--sb:#17314f;--p:#f2aa70;--pb:#4a2a10;--d:#c7a6ee;--db:#33204d;--ok:#7fd49a;--okb:#14301f;--er:#ff9a92;--erb:#3d1a18;--ac:#cfe3fa;--acf:#14161a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 "Segoe UI",Helvetica,Arial,sans-serif}
+.cr{background:var(--ac);color:var(--acf);text-align:center;padding:8px 12px;font-weight:700;letter-spacing:.3px}
+.wrap{max-width:860px;margin:0 auto;padding:14px 14px 40px}
+h1{margin:6px 0 2px;font-size:26px}h3{margin:0 0 6px;font-size:18px}p{margin:6px 0}
+.sub{color:var(--mut);margin:0 0 10px}
+nav{display:flex;gap:8px;margin:10px 0}
+nav button{flex:1;min-height:46px;border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+nav button.on{background:var(--ac);color:var(--acf);border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+.lad{padding:4px 0 4px 18px;border-left:3px solid var(--mut);position:relative;margin:8px 0;overflow-x:auto}
+.en{font-size:12px;color:var(--mut);margin-bottom:4px}
+.lr{display:flex;align-items:center;gap:8px;margin:5px 0}
+.lb{min-width:36px;text-align:center;font-weight:700;border-radius:14px;padding:2px 6px}
+.lb.s{background:var(--sb);color:var(--s)}.lb.p{background:var(--pb);color:var(--p)}.lb.d{background:var(--db);color:var(--d)}
+.nb{width:22px;height:22px;border-radius:50%;background:var(--ac);color:var(--acf);font-size:12px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+.bxs{display:flex}.ct{min-width:56px;font-weight:700}
+.s{--x:var(--s);--xb:var(--sb)}.p{--x:var(--p);--xb:var(--pb)}.d{--x:var(--d);--xb:var(--db)}
+.bx{width:46px;height:46px;box-sizing:border-box;border:2px solid var(--x);background:var(--xb);color:var(--x);margin-right:-2px;display:inline-flex;align-items:center;justify-content:center;font:inherit;font-size:21px;font-weight:700;padding:0}
+button.bx{cursor:pointer}button.bx:hover{filter:brightness(.94)}
+.a{font-style:normal;display:inline-block}
+.a.new{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:translateY(-40px) scale(.3);opacity:0}to{transform:none;opacity:1}}
+.hint{animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--x)}50%{box-shadow:0 0 0 7px transparent}}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.glow .bx{animation:glow 6.4s infinite;animation-delay:var(--dl)}
+@keyframes glow{0%{box-shadow:0 0 0 0 transparent;transform:scale(1)}5%{box-shadow:0 0 0 6px var(--x);transform:scale(1.12)}14%,100%{box-shadow:none;transform:scale(1)}}
+.msg{margin:8px 0;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);min-height:24px}
+.msg.ok{background:var(--okb);color:var(--ok);border-color:var(--ok)}.msg.er{background:var(--erb);color:var(--er);border-color:var(--er)}
+.btns,.inl{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.btn{min-height:46px;padding:0 16px;border-radius:10px;border:2px solid var(--ac);background:var(--bg);color:var(--ac);font:inherit;font-weight:700;cursor:pointer}
+.btn.pri{background:var(--ac);color:var(--acf)}
+input{flex:1;min-width:160px;min-height:46px;box-sizing:border-box;border:2px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:18px;background:var(--bg);color:var(--fg)}
+label{font-weight:700}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:5px;margin:8px 0}
+.chip{min-height:46px;border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;font:inherit;font-weight:700;cursor:pointer;line-height:1.1}
+.chip small{display:block;font-size:10px;color:var(--mut);font-weight:400}
+.chip.on{background:var(--ac);color:var(--acf);border-color:var(--ac)}.chip.on small{color:var(--acf)}
+.steps3{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.steps3 span{padding:5px 12px;border-radius:16px;border:2px solid var(--line);font-weight:700;color:var(--mut)}
+.steps3 span.on{border-color:var(--ac);color:var(--ac)}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok);transition:width .4s}
+.dots{display:flex;gap:6px;justify-content:center;margin:8px 0}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--ac)}
+.nota{font-size:18px;margin:6px 0}
+.ex{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:30px;font-weight:700;margin:8px 0}
+.ex span{padding:4px 10px;border-radius:8px;border:2px solid var(--x);color:var(--x);background:var(--xb)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<div class="cr">&copy; Made by Aasia Khawar &middot; All rights reserved</div>
+<div class="wrap">
+<h1>Electron Configuration Board</h1>
+<p class="sub">IAL Chemistry &middot; Learn the rules, watch atoms fill, then do it yourself.</p>
+<nav><button data-act="tab" data-v="learn">1 · Learn</button><button data-act="tab" data-v="watch">2 · Watch</button><button data-act="tab" data-v="practice">3 · Practice</button></nav>
+<div id="app"></div>
+</div>
+<script>
+const SUB=[["1s",1,2],["2s",1,2],["2p",3,6],["3s",1,2],["3p",3,6],["4s",1,2],["3d",5,10],["4p",3,6]];
+const SYM="H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr".split(" ");
+const sum=a=>a.reduce((x,y)=>x+y,0), tot=st=>sum(st.map(sum));
+function counts(Z){let l=Z;const r=SUB.map(s=>{const e=Math.min(l,s[2]);l-=e;return e});if(Z==24){r[5]=1;r[6]=5}if(Z==29){r[5]=1;r[6]=10}return r}
+const orbs=(e,n)=>Array.from({length:n},(_,i)=>(e>i?1:0)+(e>n+i?1:0));
+const empty=()=>SUB.map(s=>Array(s[1]).fill(0));
+const nota=c=>SUB.map((s,i)=>c[i]?s[0]+"<sup>"+c[i]+"</sup>":"").join("");
+function nextSub(Z,st){const c=counts(Z);for(let i=0;i<8;i++)if(sum(st[i])<c[i])return i;return -1}
+function nextSpot(Z,st){const i=nextSub(Z,st);if(i<0)return null;const k=sum(st[i]),n=SUB[i][1];return [i,k<n?k:k-n,k,n]}
+function why(i,k,n){const sn=SUB[i][0];return k==0?`Aufbau: ${sn} is the lowest level with space. First electron goes in as ↑.`:k<n?`Hund: use a different empty ${sn} box, also ↑. No pairing yet.`:`Pauli: every ${sn} box has one electron, so pair up with ↓.`}
+function box(t,v,i,j,o){o=o||{};const n=(o.last&&o.last[0]==i&&o.last[1]==j);const ar=(c,k)=>`<i class="a ${c}${n&&v==k?' new':''}">${c=="up"?"↑":"↓"}</i>`;
+const inner=(v>0?ar("up",1):"")+(v>1?ar("dn",2):"");const cls=`bx ${t}${o.hint?' hint':''}${o.err?' shake':''}`;
+return o.btn?`<button class="${cls}" data-i="${i}" data-j="${j}" aria-label="${SUB[i][0]} box ${j+1}, ${v} electrons">${inner}</button>`:`<div class="${cls}">${inner}</div>`}
+function ladder(st,Z,o){o=o||{};const nV=Z>18?8:Z>10?5:3;let h='<div class="lad"><div class="en">energy ↑</div>';
+for(let i=nV-1;i>=0;i--){const t=SUB[i][0][1],tt=sum(st[i]);h+=`<div class="lr"><span class="lb ${t}">${SUB[i][0]}</span><span class="bxs">`+st[i].map((v,j)=>box(t,v,i,j,{btn:o.btn,last:o.last,hint:o.hint&&o.hint[0]==i&&o.hint[1]==j,err:o.err&&o.err[0]==i&&o.err[1]==j})).join("")+`</span><span class="ct">${tt?SUB[i][0]+"<sup>"+tt+"</sup>":""}</span></div>`}
+return h+"</div>"}
+const chips=(a,cur)=>'<div class="chips">'+SYM.map((s,k)=>`<button class="chip${k+1==cur?' on':''}" data-act="${a}" data-v="${k+1}" aria-label="${s}, atomic number ${k+1}"><small>${k+1}</small>${s}</button>`).join("")+'</div>';
+let tab="learn",step=0,pa=0,pshk=0,ha=0,hshk=0,Zp=7,Zw=8,stP=empty(),stW=empty(),hist=[],last=null,hint=null,err=null,timer=null,val="",fb={t:"",c:""},
+msgP={t:"Start at the bottom of the ladder. Click a box to place electron 1.",c:""},capW="Press Step to add one electron, or Play to watch them all.";
+const HC=["Three empty 2p boxes. They all have the same energy.","Electron 1: first empty box, spin ↑.","Electron 2: a different empty box, also ↑. Not pairing yet!","Electron 3: the last empty box, ↑. Now every box has one.","Electron 4: pairing is now allowed. ↓ goes in the first box.","Electron 5: pair up in the second box.","Electron 6: p is full, 2p⁶."];
+function vLearn(){const dots='<div class="dots">'+[0,1,2,3].map(k=>`<i class="${k==step?'on':''}"></i>`).join("")+'</div>';let b="";
+if(step==0){let g='<div class="lad"><div class="en">energy ↑ (watch the glow follow the numbers)</div>';for(let i=7;i>=0;i--){const t=SUB[i][0][1];g+=`<div class="lr glow" style="--dl:${i*0.8}s"><span class="nb">${i+1}</span><span class="lb ${t}">${SUB[i][0]}</span><span class="bxs">`+Array.from({length:SUB[i][1]},(_,j)=>box(t,0,i,j)).join("")+`</span></div>`}
+b=`<h3>Rule 1 · Aufbau: lowest energy first</h3><p>Electrons settle into the <b>lowest energy</b> space available, like water filling a tank from the bottom. Only move up when a level is full.</p>${g+"</div>"}<p>Follow the numbers 1 → 8. Notice <b>4s (6) fills before 3d (7)</b>.</p>`}
+if(step==1){const sh=pshk?" shake":"";b=`<h3>Rule 2 · Pauli: maximum 2 per box</h3><p>Each box (orbital) holds <b>at most 2 electrons</b>, and they must spin in <b>opposite directions</b>: one ↑, one ↓.</p><div class="ex"><div class="bxs"><div class="bx s${sh}">${pa>0?'<i class="a up'+(pa==1?' new':'')+'">↑</i>':''}${pa>1?'<i class="a dn new">↓</i>':''}</div></div></div><div class="msg ${pshk?'er':''}" role="status">${pshk?"Pauli says no: a box is full at 2 electrons.":["Empty box. Press the button.","1 electron, spin ↑.","2nd electron goes in with spin ↓. The box is full."][pa]}</div><div class="btns"><button class="btn pri" data-act="pa">Add electron</button><button class="btn" data-act="pr">Reset</button></div>`}
+if(step==2){const sh=hshk?" shake":"";b=`<h3>Rule 3 · Hund: spread out before pairing</h3><p>When boxes have the <b>same energy</b> (like the three 2p boxes), put <b>one electron in each box first</b> (all ↑). Only then add the ↓ partners. Think of passengers taking empty bus seats before sharing.</p><div class="bxs" style="margin:10px 0">${orbs(ha,3).map((v,j)=>box("p",v,0,j,{last:ha&&ha<=6?[0,(ha-1)<3?ha-1:ha-4]:null})).join("")}</div><div class="msg ${hshk?'er':''} ${hshk?sh:''}" role="status">${hshk?"The 2p subshell holds only 6 electrons.":HC[ha]}</div><div class="btns"><button class="btn pri" data-act="ha">Add electron</button><button class="btn" data-act="hr">Reset</button></div>`}
+if(step==3){b=`<h3>Writing it down</h3><p>Example: <b>nitrogen, Z = 7</b>. Read the ladder from the bottom up.</p><div class="ex"><span class="s">1s<sup>2</sup></span><span class="s">2s<sup>2</sup></span><span class="p">2p<sup>3</sup></span></div><p><b>2</b> = energy level &nbsp; <b>p</b> = subshell type &nbsp; <b>³</b> = electrons in it.</p><div class="msg ok">Check: 2 + 2 + 3 = 7 = atomic number ✔ (always do this)</div><div class="btns"><button class="btn pri" data-act="tab" data-v="watch">Watch atoms fill</button><button class="btn" data-act="tab" data-v="practice">Try it myself</button></div>`}
+return `<div class="card">${b}</div>${dots}<div class="btns" style="justify-content:space-between"><button class="btn" data-act="back" ${step==0?'disabled':''}>← Back</button><button class="btn pri" data-act="next" ${step==3?'disabled':''}>Next →</button></div>`}
+function vWatch(){const Z=Zw;return chips("zw",Z)+`<div class="card"><h3>${SYM[Z-1]} · atomic number ${Z}</h3>${ladder(stW,Z,{last})}<div class="msg" role="status">${capW}</div><div class="nota">So far: <b>${nota(stW.map(sum))||"–"}</b></div><div class="btns"><button class="btn pri" data-act="wstep">Step</button><button class="btn" data-act="wplay">${timer?"Pause":"Play"}</button><button class="btn" data-act="wreset">Reset</button>${tot(stW)>=Z?'<button class="btn" data-act="tryit">Try this element myself →</button>':''}</div></div>`}
+function vPractice(){const Z=Zp,pl=tot(stP),fin=pl>=Z,ex=(Z==24||Z==29)?`<div class="msg">Special case: one 4s electron moves into 3d for extra stability (half-full or full d). The board follows this.</div>`:"";
+let w="";if(fin)w=`<div class="card"><h3>Step 2 · Write the configuration for ${SYM[Z-1]}</h3><p>Read your ladder from the bottom up. Type name then electrons, e.g. <b>1s2 2s2 2p3</b> (shortcuts like [Ne] are accepted).</p><label for="cf">Your answer</label><div class="inl"><input id="cf" value="${val}" autocomplete="off" autocapitalize="off"><button class="btn pri" data-act="check">Check</button><button class="btn" data-act="show">Show answer</button></div><div class="msg ${fb.c}" role="status">${fb.t||"Then press Check."}</div></div>`;
+return chips("zp",Z)+`<div class="steps3"><span class="${fin?'':'on'}">① Fill the boxes</span><span class="${fin?'on':''}">② Write it</span><span>③ Check</span></div><div class="card"><h3>${SYM[Z-1]} · atomic number ${Z}: place ${Z} electrons</h3><div class="bar"><i style="width:${pl/Z*100}%"></i></div><p style="margin:4px 0">${pl} of ${Z} placed</p>${ladder(stP,Z,{btn:1,last,hint,err})}<div class="msg ${msgP.c}" role="status">${msgP.t}</div>${ex}<div class="nota">Your diagram so far: <b>${nota(stP.map(sum))||"–"}</b></div><div class="btns"><button class="btn" data-act="undo">Undo</button><button class="btn" data-act="reset">Start again</button><button class="btn" data-act="hint">Hint</button><button class="btn" data-act="rand">Random element</button></div></div>${w}`}
+function parse(s){s=s.replace(/\[Ne\]/gi,"1s2 2s2 2p6 ").replace(/\[Ar\]/gi,"1s2 2s2 2p6 3s2 3p6 ").replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,c=>"⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).replace(/\^/g,"").replace(/\s+/g,"");const m={},re=/(\d)([spdf])(\d+?)(?=\d[spdf]|$)/gi;let x,u=0;while((x=re.exec(s))){m[x[1]+x[2].toLowerCase()]=+x[3];u+=x[0].length}return s&&u==s.length?m:null}
+function check(){const m=parse(val),c=counts(Zp);if(!m){fb={t:"I can’t read that. Use the pattern 1s2 2s2 2p3 (name, then number of electrons).",c:"er"};return}
+const t=sum(Object.values(m));if(t!=Zp){fb={t:`Your electrons add up to ${t}, but ${SYM[Zp-1]} has ${Zp}. Recount each superscript.`,c:"er"};return}
+for(let i=0;i<8;i++){const g=m[SUB[i][0]]||0;if(g!=c[i]){fb={t:`Total is right, but check ${SUB[i][0]}: copy the number from that row of your diagram.`,c:"er"};return}}
+fb={t:"Correct! Great work. Pick another element to keep practising.",c:"ok"}}
+function click(i,j){err=null;hint=null;const Z=Zp,ni=nextSub(Z,stP);let m;
+if(ni<0)m={t:"All electrons are placed. Write the configuration below.",c:"ok"};
+else if(i!=ni)m={t:(i<ni?`Aufbau: ${SUB[i][0]} is already full.`:`Aufbau: too high in energy.`)+` Next up is ${SUB[ni][0]}.`,c:"er"};
+else{const v=stP[i][j];if(v==2)m={t:"Pauli: a box holds at most 2 electrons. Choose another box.",c:"er"};
+else if(v==1&&stP[i].some(x=>x==0))m={t:`Hund: put one electron in every empty ${SUB[i][0]} box before pairing.`,c:"er"};
+else{hist.push(JSON.stringify(stP));stP[i][j]++;last=[i,j];const nx=nextSpot(Z,stP);m={t:nx?`✔ Electron placed. Next: ${SUB[nx[0]][0]}.`:"✔ All electrons placed! Now do step 2 below.",c:"ok"}}}
+if(m.c=="er")err=[i,j];msgP=m;draw()}
+function wstep(){const p=tot(stW);if(p>=Zw){stop();return draw()}const s=nextSpot(Zw,stW);stW[s[0]][s[1]]++;last=[s[0],s[1]];const e=counts(Zw)[s[0]];capW=`Electron ${p+1} → ${SUB[s[0]][0]}. `+why(s[0],s[2],s[3])+(s[2]==e-1?` ${SUB[s[0]][0]} is done: ${SUB[s[0]][0]}<sup>${e}</sup>.`:"");if(tot(stW)>=Zw){stop();capW+=" All electrons placed. Finished!"}draw()}
+function stop(){clearInterval(timer);timer=null}
+function setP(Z){Zp=Z;stP=empty();hist=[];last=null;hint=null;err=null;val="";fb={t:"",c:""};msgP={t:"Start at the bottom of the ladder. Click a box to place electron 1.",c:""}}
+function setW(Z){stop();Zw=Z;stW=empty();last=null;capW="Press Step to add one electron, or Play to watch them all."}
+function act(a,v){err=null;
+if(a=="tab"){stop();tab=v;if(v=="learn")step=0}
+else if(a=="next")step=Math.min(3,step+1);else if(a=="back")step=Math.max(0,step-1);
+else if(a=="pa"){pshk=0;if(pa<2)pa++;else pshk=1}else if(a=="pr"){pa=0;pshk=0}
+else if(a=="ha"){hshk=0;if(ha<6)ha++;else hshk=1}else if(a=="hr"){ha=0;hshk=0}
+else if(a=="zw")setW(+v);else if(a=="zp")setP(+v);
+else if(a=="wstep"){stop();return wstep()}
+else if(a=="wplay"){if(timer)stop();else{if(tot(stW)>=Zw)setW(Zw);timer=setInterval(wstep,1000)}}
+else if(a=="wreset")setW(Zw);else if(a=="tryit"){setP(Zw);tab="practice"}
+else if(a=="undo"){if(hist.length){stP=JSON.parse(hist.pop());last=null;msgP={t:"Last electron removed.",c:""}}}
+else if(a=="reset")setP(Zp);else if(a=="rand")setP(1+Math.floor(Math.random()*36));
+else if(a=="hint"){const s=nextSpot(Zp,stP);if(s){hint=[s[0],s[1]];msgP={t:"Hint: the pulsing box. "+why(s[0],s[2],s[3]),c:""}}}
+else if(a=="check")check();else if(a=="show")fb={t:"Answer: "+nota(counts(Zp)),c:"ok"};
+draw()}
+function draw(){const f=document.activeElement;let k=null;if(f&&f.dataset){if(f.dataset.act)k=`[data-act="${f.dataset.act}"]`+(f.dataset.v?`[data-v="${f.dataset.v}"]`:"");else if(f.dataset.i!==undefined)k=`.bx[data-i="${f.dataset.i}"][data-j="${f.dataset.j}"]`}
+if(tab!="watch")stop();$("#app").innerHTML=({learn:vLearn,watch:vWatch,practice:vPractice})[tab]();
+document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v==tab));if(k){const e=document.querySelector(k);if(e)e.focus({preventScroll:true})}}
+function $(s){return document.querySelector(s)}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-act],button.bx[data-i]");if(!b||b.disabled)return;if(b.dataset.i!==undefined)click(+b.dataset.i,+b.dataset.j);else act(b.dataset.act,b.dataset.v)});
+document.addEventListener("input",e=>{if(e.target.id=="cf")val=e.target.value});
+document.addEventListener("keydown",e=>{if(e.target.id=="cf"&&e.key=="Enter")act("check")});
+draw();
+</script></body></html>
